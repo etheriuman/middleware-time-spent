@@ -44,20 +44,34 @@ app.use( function (req, res, next) {
 })
 
 
+// 設定從 middleware 接收到請求到 router 回應的時間計算函式
+const responseTime = function () {
+
+  // 抓取 response 的 timestamp
+  const responseTimestamp = new Date(Date.now())
+  
+  // 計算 startTimestamp 到 responseTimestamp 的時間差
+  const timeSpent = responseTimestamp - startTimestamp
+
+  // log 出消耗時間
+  console.log(`time spent: ${timeSpent} millisecond!`)
+
+}
 
 
-// 路由設定 (second and last middleware)
+
+// 路由設定 (second and the last middleware)
 
 // 這邊因為沒有給response一個完整的html結構，瀏覽器會預設自己去找 /favicon.ico檔案，以至於 double request
-// --> 給 browser 一個 site icon data
+// --> 所以給 browser 一個 site icon data 防止瀏覽器重複送出請求
 const iconData = '<link rel="icon" href="data:,">'
 
 app.get('/', (req, res) => {
+  // 設定一個 5566ms 的延遲驗證 log 的時間是否正確
   setTimeout(() => {
     responseTime()
     res.send(iconData + '列出全部 Todo')
-  }, 5000
-  )
+  }, 5566)
 })
 
 app.get('/new', (req, res) => {
@@ -76,19 +90,6 @@ app.post('/', (req, res) => {
 })
 
 
-// 設定 response 時的計算時間函式
-const responseTime = function () {
-
-  // 抓取 response 的 timestamp
-  const responseTimestamp = new Date(Date.now())
-  
-  // 計算 startTimestamp 到 responseTimestamp 的時間差
-  const timeSpent = responseTimestamp - startTimestamp
-
-  // log 出消耗時間
-  console.log(`time spent: ${timeSpent} millisecond!`)
-
-}
 
 // 啟動伺服器，伺服器等待中...
 app.listen(port, () => {
