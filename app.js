@@ -7,7 +7,7 @@ const port = 3000
 // 用 startTimestamp變數來儲存 request 的 timestamp
 let startTimestamp
 
-// request funtion middleware (first middleware)
+// request function middleware (first middleware)
 app.use( function (req, res, next) {
 
   // 請求的url
@@ -62,7 +62,7 @@ const responseTime = function () {
 
 // 路由設定 (second and the last middleware)
 
-// 這邊因為沒有給response一個完整的html結構，瀏覽器會預設自己去找 /favicon.ico檔案，以至於 double request
+// 這邊因為沒response一個完整的html結構，瀏覽器會預設自己去找 /favicon.ico檔案，以至於 double request
 // --> 所以給 browser 一個 site icon data 防止瀏覽器重複送出請求
 const iconData = '<link rel="icon" href="data:,">'
 
