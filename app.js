@@ -93,5 +93,5 @@ app.post('/', (req, res) => {
 
 // 啟動伺服器，伺服器等待中...
 app.listen(port, () => {
-  console.log(`App running on port ${port}`)
+  console.log(`App running on http://localhost${port}`)
 })
