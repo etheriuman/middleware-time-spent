@@ -11,7 +11,7 @@
 3. Nodemon
 
 - ## 功能 :
-  計算一個request從進入middleware到離開middleware所花的時間。
+  除了每次伺服器收到請求時都會log出日期、時間、請求方法與路由以外，計算一個request從進入middleware到離開middleware所花的時間。
 
 - ## 應用程式安裝前導 :
 1. ### 請用 Mac users: 終端機 / Windows users: Git Bash 輸入以下內容：
