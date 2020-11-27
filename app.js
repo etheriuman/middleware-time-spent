@@ -7,7 +7,7 @@ const port = 3000
 // 用 startTimestamp變數來儲存 request 的 timestamp
 let startTimestamp
 
-// request function middleware (first middleware)
+// request function middleware
 app.use( function (req, res, next) {
 
   // 請求的url
@@ -38,6 +38,11 @@ app.use( function (req, res, next) {
   // log start time
   console.log(`${startTimeOutPrint} | ${method} from '${currentRouter}'`)
 
+  // 在 response finished 時觸發 responseTime()
+  res.on('finish', () => {
+    responseTime()
+  }) 
+
   // 結束 middleware 
   next()
 
@@ -60,7 +65,7 @@ const responseTime = function () {
 
 
 
-// 路由設定 (second and the last middleware)
+// 路由設定
 
 // 這邊因為沒response一個完整的html結構，瀏覽器會預設自己去找 /favicon.ico檔案，以至於 double request
 // --> 所以給 browser 一個 site icon data 防止瀏覽器重複送出請求
@@ -69,23 +74,22 @@ const iconData = '<link rel="icon" href="data:,">'
 app.get('/', (req, res) => {
   // 設定一個 5566ms 的延遲驗證 log 的時間是否正確
   setTimeout(() => {
-    responseTime()
     res.send(iconData + '列出全部 Todo')
   }, 5566)
 })
 
 app.get('/new', (req, res) => {
-  responseTime()
+  
   res.send(iconData + '新增 Todo 頁面')
 })
  
 app.get('/:id', (req, res) => {
-  responseTime()
+  
   res.send(iconData + '顯示一筆 Todo')
 })
 
 app.post('/', (req, res) => {
-  responseTime()
+  
   res.send(iconData + '新增一筆  Todo')
 })
 

@@ -1,6 +1,6 @@
 # 小實驗： server response logger
-  利用紀錄從request傳入伺服器第一個到最後一個middleware的timestamp來判斷request -> response的耗費時間。
-  ![image](https://github.com/etheriuman/middleware-time-spent/blob/master/middleware.png)
+利用紀錄從request傳入伺服器第一個到最後一個middleware的timestamp來判斷request -> response的耗費時間。  
+![image](https://github.com/etheriuman/middleware-time-spent/blob/master/middleware_image.png)
 ---
 - ## 運行環境需求:
   Node.js
